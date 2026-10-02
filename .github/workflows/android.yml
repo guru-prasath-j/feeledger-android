@@ -21,6 +21,18 @@ jobs:
       - name: Unit tests
         run: ./gradlew --no-daemon testDebugUnitTest
 
+      - name: Test summary
+        if: always()
+        run: |
+          python3 - <<'EOF'
+          import glob, xml.etree.ElementTree as ET
+          t = f = e = s = 0
+          for path in glob.glob("app/build/test-results/testDebugUnitTest/*.xml"):
+              r = ET.parse(path).getroot()
+              t += int(r.get("tests")); f += int(r.get("failures")); e += int(r.get("errors")); s += int(r.get("skipped"))
+          print(f"::notice title=Unit tests::{t} tests, {f} failures, {e} errors, {s} skipped")
+          EOF
+
       - name: Build debug APK
         run: ./gradlew --no-daemon assembleDebug
 
