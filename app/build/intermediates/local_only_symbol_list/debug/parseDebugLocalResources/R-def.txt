@@ -1,0 +1,10 @@
+R_DEF: Internal format may change without notice
+local
+color brand_light
+color brand_navy
+drawable ic_launcher_foreground
+drawable ic_stat_fee
+mipmap ic_launcher
+string app_name
+style Theme.FeeLedger
+xml file_paths

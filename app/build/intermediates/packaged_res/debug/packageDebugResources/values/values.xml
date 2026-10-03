@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="brand_light">#FFF4F7FC</color>
+    <color name="brand_navy">#FF1A3A6B</color>
+    <string name="app_name">FeeLedger</string>
+    <style name="Theme.FeeLedger" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowBackground">@color/brand_light</item>
+    </style>
+</resources>

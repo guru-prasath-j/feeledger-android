@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "dev.guruprasath.feeledger.app-debug-68:/drawable_ic_stat_fee.xml.flat",
+        "source": "dev.guruprasath.feeledger.app-main-70:/drawable/ic_stat_fee.xml"
+    },
+    {
+        "merged": "dev.guruprasath.feeledger.app-debug-68:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "dev.guruprasath.feeledger.app-main-70:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "dev.guruprasath.feeledger.app-debug-68:/xml_file_paths.xml.flat",
+        "source": "dev.guruprasath.feeledger.app-main-70:/xml/file_paths.xml"
+    },
+    {
+        "merged": "dev.guruprasath.feeledger.app-debug-68:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "dev.guruprasath.feeledger.app-main-70:/mipmap-anydpi-v26/ic_launcher.xml"
+    }
+]
