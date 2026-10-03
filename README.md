@@ -21,6 +21,12 @@ Captured from the real app on an Android 14 emulator by the scripted walkthrough
 [`DemoWalkthroughTest`](app/src/androidTest/java/dev/guruprasath/feeledger/demo/DemoWalkthroughTest.kt)
 (run it yourself from the **Emulator demo** workflow). Full screen recording: [docs/demo.mp4](docs/demo.mp4).
 
+### App flow map
+
+Every screen and the tap that leads to the next one (dashed green: the daily reminder).
+
+<p align="center"><img src="docs/flow-map.png" width="820" alt="FeeLedger app flow map"></p>
+
 <p align="center"><img src="docs/feeledger-demo.gif" width="300" alt="FeeLedger walkthrough"></p>
 
 | Add a student | Owed months | UPI request QR | Record payment |
