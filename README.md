@@ -15,6 +15,22 @@ collect a fixed fee every month, and almost all of them track it in a notebook o
   and the tutor can't tell which payment was for which child or month.
 - Generic expense apps don't model "₹1,500 due on the 5th of every month, per student".
 
+## See it run
+
+Captured from the real app on an Android 14 emulator by the scripted walkthrough in
+[`DemoWalkthroughTest`](app/src/androidTest/java/dev/guruprasath/feeledger/demo/DemoWalkthroughTest.kt)
+(run it yourself from the **Emulator demo** workflow). Full screen recording: [docs/demo.mp4](docs/demo.mp4).
+
+<p align="center"><img src="docs/feeledger-demo.gif" width="300" alt="FeeLedger walkthrough"></p>
+
+| Add a student | Owed months | UPI request QR | Record payment |
+| --- | --- | --- | --- |
+| <img src="docs/screenshots/03-add-student.png" width="200"> | <img src="docs/screenshots/04-student-detail.png" width="200"> | <img src="docs/screenshots/05-upi-request.png" width="200"> | <img src="docs/screenshots/06-record-payment.png" width="200"> |
+
+| Roster | Overdue filter | Settings | Daily reminder |
+| --- | --- | --- | --- |
+| <img src="docs/screenshots/08-home-roster.png" width="200"> | <img src="docs/screenshots/09-overdue-filter.png" width="200"> | <img src="docs/screenshots/10-settings.png" width="200"> | <img src="docs/screenshots/11-reminder-notification.png" width="200"> |
+
 ## What FeeLedger does
 
 - **Student roster with a monthly fee and due day.** Every month from the start month to today is billed, so
@@ -64,6 +80,7 @@ Requires JDK 17 and the Android SDK (API 35).
 ```
 
 CI builds the APK and runs the tests on every push; the debug APK is attached to each workflow run.
+The **Emulator demo** workflow boots an API 34 emulator, runs the walkthrough end to end and refreshes the screenshots above.
 
 ## Tech
 
