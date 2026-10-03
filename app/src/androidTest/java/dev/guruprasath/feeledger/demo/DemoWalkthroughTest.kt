@@ -3,7 +3,6 @@ package dev.guruprasath.feeledger.demo
 import android.graphics.Bitmap
 import androidx.compose.ui.test.hasScrollAction
 import androidx.compose.ui.test.hasText
-import androidx.compose.ui.test.isSelectable
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithContentDescription
@@ -53,8 +52,12 @@ class DemoWalkthroughTest {
 
     private fun waitForCount(text: String, count: Int, timeoutMs: Long = 15_000) {
         compose.waitUntil(timeoutMs) {
-            compose.onAllNodesWithText(text).fetchSemanticsNodes().size == count
+            compose.onAllNodesWithText(text, useUnmergedTree = true).fetchSemanticsNodes().size == count
         }
+    }
+
+    private fun tap(label: String, index: Int = 0) {
+        compose.onAllNodesWithText(label, useUnmergedTree = true)[index].performClick()
     }
 
     private fun shot(name: String) {
@@ -72,14 +75,14 @@ class DemoWalkthroughTest {
         compose.onNodeWithText("Your name (shown to parents)").performTextInput("Meena Iyer")
         compose.onNodeWithText("Your UPI ID").performTextInput("meena.tuition@okaxis")
         shot("01-onboarding")
-        compose.onNodeWithText("Get started").performClick()
+        tap("Get started")
 
         // 2. Empty roster.
         waitForText("No students yet")
         shot("02-home-empty")
 
         // 3. Add a student whose billing started two months ago.
-        compose.onNodeWithText("Add student").performClick()
+        tap("Add student")
         waitForText("Student name")
         compose.onNodeWithText("Student name").performTextInput("Ravi Kumar")
         compose.onNodeWithText("Batch / class (optional)").performTextInput("Class 8 Maths, Mon-Wed 5 PM")
@@ -88,7 +91,8 @@ class DemoWalkthroughTest {
         compose.onNodeWithContentDescription("Previous month").performClick()
         compose.onNodeWithContentDescription("Previous month").performClick()
         shot("03-add-student")
-        compose.onNodeWithText("Save student").performScrollTo().performClick()
+        compose.onNodeWithText("Save student", useUnmergedTree = true).performScrollTo()
+        tap("Save student")
 
         // 4. The student page bills every month since the start month.
         waitForText("Pending fees")
@@ -96,17 +100,17 @@ class DemoWalkthroughTest {
         shot("04-student-detail")
 
         // 5. Request the oldest month over UPI: QR + shareable message.
-        compose.onAllNodesWithText("Request via UPI")[0].performClick()
+        tap("Request via UPI")
         waitForText("Share QR")
         shot("05-upi-request")
-        compose.onNodeWithText("Close").performClick()
+        tap("Close")
 
         // 6. The parent paid: record it with the UTR from their receipt.
-        compose.onAllNodesWithText("Mark paid")[0].performClick()
+        tap("Mark paid")
         waitForText("UTR / transaction ID")
         compose.onNodeWithText("UTR / transaction ID (optional)").performTextInput("427812345678")
         shot("06-record-payment")
-        compose.onNodeWithText("Save").performClick()
+        tap("Save")
         waitForCount("Mark paid", 2)
         compose.onNode(hasScrollAction()).performScrollToNode(hasText("Payment history"))
         shot("07-after-payment")
@@ -117,9 +121,9 @@ class DemoWalkthroughTest {
         waitForText("Kabir Mehta")
         shot("08-home-roster")
 
-        compose.onNode(hasText("Overdue") and isSelectable()).performClick()
+        tap("Overdue")
         shot("09-overdue-filter")
-        compose.onNode(hasText("All") and isSelectable()).performClick()
+        tap("All")
 
         // 8. Settings: payment details, app lock, CSV export, privacy note.
         compose.onNodeWithContentDescription("Settings").performClick()
