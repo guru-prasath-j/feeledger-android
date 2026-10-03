@@ -60,8 +60,18 @@ class DemoWalkthroughTest {
         compose.onAllNodesWithText(label, useUnmergedTree = true)[index].performClick()
     }
 
+    private fun dismissSystemDialogs() {
+        val device = UiDevice.getInstance(instrumentation)
+        repeat(3) {
+            if (device.findObject(By.textContains("isn't responding")) == null) return
+            device.findObject(By.text("Wait"))?.click()
+            Thread.sleep(500)
+        }
+    }
+
     private fun shot(name: String) {
         compose.waitForIdle()
+        dismissSystemDialogs()
         Thread.sleep(1_500)
         val bitmap = instrumentation.uiAutomation.takeScreenshot()
         val dir = File(app.filesDir, "screenshots").apply { mkdirs() }

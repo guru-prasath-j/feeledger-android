@@ -7,6 +7,11 @@ PKG=dev.guruprasath.feeledger
 
 adb wait-for-device
 adb shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done'
+# CI emulators often show "Pixel Launcher isn't responding"; keep system dialogs out of the captures.
+adb shell settings put global hide_error_dialogs 1 || true
+adb shell pm disable-user --user 0 com.google.android.apps.nexuslauncher || true
+adb shell cmd statusbar collapse || true
+sleep 20
 # No soft keyboard in the captures: text is entered through Compose semantics, not the IME.
 for ime in $(adb shell ime list -s | tr -d '\r'); do adb shell ime disable "$ime" || true; done
 
