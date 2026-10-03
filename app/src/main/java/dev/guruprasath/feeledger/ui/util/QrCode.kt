@@ -12,8 +12,8 @@ object QrCode {
         val hints = mapOf(
             EncodeHintType.MARGIN to 2,
             EncodeHintType.ERROR_CORRECTION to ErrorCorrectionLevel.M,
-            EncodeHintType.CHARACTER_SET to "UTF-8",
         )
+        // No CHARACTER_SET hint: UPI links are ASCII, and an ECI header confuses some scanners.
         val matrix = QRCodeWriter().encode(content, BarcodeFormat.QR_CODE, sizePx, sizePx, hints)
         val width = matrix.width
         val height = matrix.height
